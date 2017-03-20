@@ -21,3 +21,6 @@ This is the result of the demo.
 
 ### Issues
 There are still some unknown memory leaks. I tried to minimize the use of heap memory at first and thus used multiple pointers to point to the same memory in BSP construction and operations. However, when I try to clean up, the pointers overlap and the program give me "freeing unallocated memory" error. So I just do not destroy the BSP at all. Because of the time limit, I did not get time to fix them before I write this file.
+
+### Credit
+[csg.js](https://github.com/evanw/csg.js/)
