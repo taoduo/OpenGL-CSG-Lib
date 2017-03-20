@@ -3,6 +3,7 @@
 /**
  * Duo Tao
  * CSGError.h
+ * Report the error and help debugging
  */
 #include <stdio.h>
 #include <stdlib.h>

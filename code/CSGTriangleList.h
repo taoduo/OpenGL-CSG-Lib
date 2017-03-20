@@ -34,6 +34,9 @@ void CSGTriangleListClear(CSGTriangleList *list);
 
 CSGTriangleList *CSGTriangleListConcat(CSGTriangleList *A, CSGTriangleList *B);
 
+/**
+ * Converts a mesh to a triangle list
+ */
 CSGTriangleList *CSGTriangleListFromMesh(meshMesh *mesh);
 
 CSGTriangle *CSGTriangleListGetTriangle(CSGTriangleList *list, GLuint i);

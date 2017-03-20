@@ -141,16 +141,25 @@ int initializeMesh() {
 	// init every mesh
 	meshMesh meshA;
 	meshMesh meshB;
-	if (meshInitializeBox(&meshB, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5) != 0 || meshInitializeCapsule(&meshA, 0.5, 2.0, 16, 32)) {
+	meshMesh meshC;
+	meshMesh meshD;
+	if (meshInitializeBox(&meshB, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5) != 0 || meshInitializeCapsule(&meshA, 0.5, 2.0, 16, 32)
+		|| 	meshInitializeBox(&meshC, -0.3, 0.3, -0.3, 0.3, -0.3, 0.3) || meshInitializeSphere(&meshD, 0.3, 16, 32)) {
 	 	return 1;
 	}
 	GLdouble translation[3] = {0.5, 0.5, 0.5};
+	GLdouble translation1[3] = {0.2, 0.2, 0.3};
 	meshTranslate(&meshA, translation);
-	// intersect the two meshes
+	meshTranslate(&meshD, translation1);
+	// boolean operations: ((capsule intersect box) union another box) subtract sphere
 	meshMesh mesh;
 	CSGIntersection(&meshA, &meshB, &mesh);
 	meshDestroy(&meshA);
 	meshDestroy(&meshB);
+	CSGUnion(&mesh, &meshC, &mesh);
+	meshDestroy(&meshC);
+	CSGSubtraction(&mesh, &meshD, &mesh);
+	meshDestroy(&meshD);
 	// openGL the produced mesh
 	meshGLInitialize(&mesh1, &mesh);
 	meshDestroy(&mesh);
